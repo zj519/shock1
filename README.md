@@ -273,29 +273,17 @@ sbatch scaling_test.slurm
 - 8-12 threads: Diminishing returns
 - 16+ threads: Minimal improvement
 
-**Recommendation**: Use 8-12 threads for best efficiency/performance trade-off
-
-### Performance Metrics
-
-Typical performance on modern CPU:
-- **~3000 timesteps/second** with 2140 atoms (8 threads)
-- **~250 ns/day** simulation time
-- **~30-40 minutes** for 100,000 step shock simulation
 
 ## Expected Results
 
 ### Temperature Jump
-- Pre-shock: T ≈ 300 K
-- Post-shock: T ≈ 1000-3000 K (depends on piston velocity)
-- Shock front width: ~10-50 Å
+- Pre-shock: T1 ≈ 300 K
+- Post-shock: T2 ≈ T1 K (depends on piston velocity)
 
-### Density Jump
-- Pre-shock: ρ ≈ 6×10⁻⁶ g/cm³ (low density gas)
-- Post-shock: ρ ≈ 4×ρ₀ (Rankine-Hugoniot relations)
 
 ### Pressure Jump
-- Pre-shock: P ≈ 0 atm (low density)
-- Post-shock: P ≈ 1000-10000 atm
+- Pre-shock: P1 ≈ 5 atm (low density)
+- Post-shock: P2 ≈ 29P1
 
 ## Data Analysis
 
