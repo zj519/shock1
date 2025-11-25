@@ -278,7 +278,7 @@ sbatch scaling_test.slurm
 
 ### Temperature Jump
 - Pre-shock: T1 ≈ 300 K
-- Post-shock: T2 ≈ T1 K (depends on piston velocity)
+- Post-shock: T2 ≈ 5.8T1 K (depends on piston velocity)
 
 
 ### Pressure Jump
