@@ -14,10 +14,10 @@ CH3 inherits OPLSAA {
   # Terminal methyl group
   # atomID   molID  atomType      charge  X       Y       Z
   write("Data Atoms") {
-    $atom:c   $mol:...  @atom:54L      0.0   0.000   0.000   0.000
-    $atom:h1  $mol:...  @atom:60LCH3   0.0   0.631   0.631   0.631
-    $atom:h2  $mol:...  @atom:60LCH3   0.0   0.631  -0.631  -0.631
-    $atom:h3  $mol:...  @atom:60LCH3   0.0  -0.631   0.631  -0.631
+    $atom:c   $mol:.  @atom:54L      0.0   0.000   0.000   0.000
+    $atom:h1  $mol:.  @atom:60LCH3   0.0   0.631   0.631   0.631
+    $atom:h2  $mol:.  @atom:60LCH3   0.0   0.631  -0.631  -0.631
+    $atom:h3  $mol:.  @atom:60LCH3   0.0  -0.631   0.631  -0.631
   }
   
   # Bond connectivity (L-OPLSAA will auto-detect bond types)
@@ -33,9 +33,9 @@ CH2 inherits OPLSAA {
   # Uses L-OPLSAA specific atom types
   # atomID   molID  atomType      charge  X       Y       Z
   write("Data Atoms") {
-    $atom:c   $mol:...  @atom:57L      0.0   0.000   0.000   0.000
-    $atom:h1  $mol:...  @atom:60LCH2   0.0   0.631   0.892   0.000
-    $atom:h2  $mol:...  @atom:60LCH2   0.0   0.631  -0.892   0.000
+    $atom:c   $mol:.  @atom:57L      0.0   0.000   0.000   0.000
+    $atom:h1  $mol:.  @atom:60LCH2   0.0   0.631   0.892   0.000
+    $atom:h2  $mol:.  @atom:60LCH2   0.0   0.631  -0.892   0.000
   }
   
   # Bond connectivity

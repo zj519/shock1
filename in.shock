@@ -25,7 +25,7 @@ kspace_style    none
 
 
 #place atoms randomly
-displace_atoms  all random 1800 1300 1300 87654 units box
+#displace_atoms  all random 1800 1300 1300 87654 units box
 change_box	all boundary	f p p
 
 # Add piston parameters (type 1001 to avoid conflicts)
@@ -67,18 +67,17 @@ variable        del  equal 370.0
 variable        w    equal 10*${lam}
 variable        lz   equal 10*${del}
 
-# Pre-shock state: Ta=300 K, Pa~5 atm (equilibrate)
-velocity        all create 300.0 9265 mom yes rot yes dist gaussian
 
 #increase neighbor list size for high initial density
 #neigh_modify    one 4000 page 400000
 
 #Minimize energy first to resolve overlaps
-#thermo          100
-#minimize        1.0e-4 1.0e-6 1000 10000
-
+minimize        1.0e-4 1.0e-6 1000 10000
 # Reset box after minimization
 reset_timestep  0
+
+# Pre-shock state: Ta=300 K, Pa~5 atm (equilibrate)
+velocity        all create 300.0 9265 mom yes rot yes dist gaussian
 
 # Equilibration stage
 thermo          1000
