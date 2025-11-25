@@ -1,0 +1,95 @@
+# C12H26.lt - n-Dodecane molecule using L-OPLSAA2024 force field
+
+# L-OPLSAA atom types used:
+# @atom:54L = n-CH3 carbon (charge -0.222 in LOPLS2012)
+# @atom:57L = CH2 carbon (charge -0.148 in LOPLS2012)
+# @atom:60LCH3 = H on CH3 (charge +0.074 in LOPLS2012)
+# @atom:60LCH2 = H on CH2 (charge +0.074 in LOPLS2012)
+
+import "/home1/zimengji/moltemplate/moltemplate/force_fields/loplsaa2024.lt"
+
+# L-OPLSAA uses base class OPLSAA, so we still inherit from OPLSAA
+
+CH3 inherits OPLSAA {
+  # Terminal methyl group
+  # atomID   molID  atomType      charge  X       Y       Z
+  write("Data Atoms") {
+    $atom:c   $mol:...  @atom:54L      0.0   0.000   0.000   0.000
+    $atom:h1  $mol:...  @atom:60LCH3   0.0   0.631   0.631   0.631
+    $atom:h2  $mol:...  @atom:60LCH3   0.0   0.631  -0.631  -0.631
+    $atom:h3  $mol:...  @atom:60LCH3   0.0  -0.631   0.631  -0.631
+  }
+  
+  # Bond connectivity (L-OPLSAA will auto-detect bond types)
+  write("Data Bond List") {
+    $bond:ch1  $atom:c  $atom:h1
+    $bond:ch2  $atom:c  $atom:h2
+    $bond:ch3  $atom:c  $atom:h3
+  }
+}
+
+CH2 inherits OPLSAA {
+  # Internal methylene group
+  # Uses L-OPLSAA specific atom types
+  # atomID   molID  atomType      charge  X       Y       Z
+  write("Data Atoms") {
+    $atom:c   $mol:...  @atom:57L      0.0   0.000   0.000   0.000
+    $atom:h1  $mol:...  @atom:60LCH2   0.0   0.631   0.892   0.000
+    $atom:h2  $mol:...  @atom:60LCH2   0.0   0.631  -0.892   0.000
+  }
+  
+  # Bond connectivity
+  write("Data Bond List") {
+    $bond:ch1  $atom:c  $atom:h1
+    $bond:ch2  $atom:c  $atom:h2
+  }
+}
+
+# Complete n-Dodecane molecule
+
+C12H26 inherits OPLSAA {
+  
+  # Create molecular subunits
+  # 2 terminal CH3 groups + 10 internal CH2 groups
+  ch3_1 = new CH3
+  ch3_2 = new CH3
+  ch2 = new CH2 [10]
+  
+  # Bond connectivity: CH3-CH2-CH2-...-CH2-CH3
+  # L-OPLSAA will automatically determine bond, angle, and dihedral types
+  # with parameters optimized for long alkane chains
+  write("Data Bond List") {
+    $bond:b1   $atom:ch3_1/c  $atom:ch2[0]/c
+    $bond:b2   $atom:ch2[0]/c  $atom:ch2[1]/c
+    $bond:b3   $atom:ch2[1]/c  $atom:ch2[2]/c
+    $bond:b4   $atom:ch2[2]/c  $atom:ch2[3]/c
+    $bond:b5   $atom:ch2[3]/c  $atom:ch2[4]/c
+    $bond:b6   $atom:ch2[4]/c  $atom:ch2[5]/c
+    $bond:b7   $atom:ch2[5]/c  $atom:ch2[6]/c
+    $bond:b8   $atom:ch2[6]/c  $atom:ch2[7]/c
+    $bond:b9   $atom:ch2[7]/c  $atom:ch2[8]/c
+    $bond:b10  $atom:ch2[8]/c  $atom:ch2[9]/c
+    $bond:b11  $atom:ch2[9]/c  $atom:ch3_2/c
+  }
+  
+  # Position subunits in extended conformation (all-trans)
+  ch3_1.move(0.00, 0, 0)
+  ch2[0].move(1.53, 0, 0)
+  ch2[1].move(3.06, 0, 0)
+  ch2[2].move(4.59, 0, 0)
+  ch2[3].move(6.12, 0, 0)
+  ch2[4].move(7.65, 0, 0)
+  ch2[5].move(9.18, 0, 0)
+  ch2[6].move(10.71, 0, 0)
+  ch2[7].move(12.24, 0, 0)
+  ch2[8].move(13.77, 0, 0)
+  ch2[9].move(15.30, 0, 0)
+  ch3_2.move(16.83, 0, 0)
+  
+} # C12H26
+
+# Charge neutrality check:
+# ========================
+# CH3 group: -0.222 + 3 x 0.074 = -0.222 + 0.222 = 0.0
+# CH2 group: -0.148 + 2 x 0.074 = -0.148 + 0.148 = 0.0
+# Total: 0.0
